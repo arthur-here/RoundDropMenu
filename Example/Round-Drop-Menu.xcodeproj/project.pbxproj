@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		EC8AA5DF1B0610D3000E06E4 /* DropProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */; };
-		EC8AA5E01B0610D3000E06E4 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DC1B0610D3000E06E4 /* DropView.swift */; };
 		EC8AA5E11B0610D3000E06E4 /* RoundDropMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */; };
-		EC8AA5E21B0610D3000E06E4 /* RoundDropMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DE1B0610D3000E06E4 /* RoundDropMenuView.swift */; };
+		EC8AA5E61B066E23000E06E4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */; };
+		EC8AA5E81B0678F3000E06E4 /* RoundDropMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */; };
+		EC8AA5EE1B067BEC000E06E4 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5EC1B067BEC000E06E4 /* DropView.swift */; };
+		EC8AA5EF1B067BEC000E06E4 /* RoundDropMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5ED1B067BEC000E06E4 /* RoundDropMenuView.swift */; };
 		EC99CB3B1B055082001DBDDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99CB3A1B055082001DBDDC /* AppDelegate.swift */; };
 		EC99CB401B055082001DBDDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC99CB3E1B055082001DBDDC /* Main.storyboard */; };
 		EC99CB421B055082001DBDDC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC99CB411B055082001DBDDC /* Images.xcassets */; };
@@ -30,10 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropProtocol.swift; path = RoundDropMenu/DropProtocol.swift; sourceTree = "<group>"; };
-		EC8AA5DC1B0610D3000E06E4 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropView.swift; path = RoundDropMenu/DropView.swift; sourceTree = "<group>"; };
-		EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuVC.swift; path = RoundDropMenu/RoundDropMenuVC.swift; sourceTree = "<group>"; };
-		EC8AA5DE1B0610D3000E06E4 /* RoundDropMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuView.swift; path = RoundDropMenu/RoundDropMenuView.swift; sourceTree = "<group>"; };
+		EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropProtocol.swift; path = RoundDropMenu/Protocols/DropProtocol.swift; sourceTree = "<group>"; };
+		EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuVC.swift; path = RoundDropMenu/Controller/RoundDropMenuVC.swift; sourceTree = "<group>"; };
+		EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDelegate.swift; path = RoundDropMenu/Protocols/RoundDropMenuDelegate.swift; sourceTree = "<group>"; };
+		EC8AA5EC1B067BEC000E06E4 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropView.swift; path = RoundDropMenu/View/DropView.swift; sourceTree = "<group>"; };
+		EC8AA5ED1B067BEC000E06E4 /* RoundDropMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuView.swift; path = RoundDropMenu/View/RoundDropMenuView.swift; sourceTree = "<group>"; };
 		EC99CB351B055082001DBDDC /* Round-Drop-Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Round-Drop-Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC99CB391B055082001DBDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC99CB3A1B055082001DBDDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC8AA5E91B067B84000E06E4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AA5EC1B067BEC000E06E4 /* DropView.swift */,
+				EC8AA5ED1B067BEC000E06E4 /* RoundDropMenuView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EC8AA5EA1B067B93000E06E4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */,
+				EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		EC8AA5EB1B067BA5000E06E4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		EC99CB2C1B055082001DBDDC = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				EC99CB631B060B70001DBDDC /* Drop.swift */,
+				EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */,
 				EC99CB3A1B055082001DBDDC /* AppDelegate.swift */,
 				EC99CB3E1B055082001DBDDC /* Main.storyboard */,
 				EC99CB621B0602D3001DBDDC /* RoundDropMenu */,
@@ -124,10 +155,9 @@
 		EC99CB621B0602D3001DBDDC /* RoundDropMenu */ = {
 			isa = PBXGroup;
 			children = (
-				EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */,
-				EC8AA5DC1B0610D3000E06E4 /* DropView.swift */,
-				EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */,
-				EC8AA5DE1B0610D3000E06E4 /* RoundDropMenuView.swift */,
+				EC8AA5EB1B067BA5000E06E4 /* Controller */,
+				EC8AA5EA1B067B93000E06E4 /* Protocols */,
+				EC8AA5E91B067B84000E06E4 /* View */,
 			);
 			name = RoundDropMenu;
 			sourceTree = "<group>";
@@ -233,11 +263,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8AA5DF1B0610D3000E06E4 /* DropProtocol.swift in Sources */,
-				EC8AA5E21B0610D3000E06E4 /* RoundDropMenuView.swift in Sources */,
-				EC8AA5E01B0610D3000E06E4 /* DropView.swift in Sources */,
+				EC8AA5E81B0678F3000E06E4 /* RoundDropMenuDelegate.swift in Sources */,
 				EC8AA5E11B0610D3000E06E4 /* RoundDropMenuVC.swift in Sources */,
+				EC8AA5EF1B067BEC000E06E4 /* RoundDropMenuView.swift in Sources */,
 				EC99CB641B060B70001DBDDC /* Drop.swift in Sources */,
 				EC99CB3B1B055082001DBDDC /* AppDelegate.swift in Sources */,
+				EC8AA5E61B066E23000E06E4 /* MenuViewController.swift in Sources */,
+				EC8AA5EE1B067BEC000E06E4 /* DropView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

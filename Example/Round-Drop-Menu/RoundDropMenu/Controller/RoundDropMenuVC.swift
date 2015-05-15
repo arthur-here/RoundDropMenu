@@ -12,12 +12,12 @@ class RoundDropMenuViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet var menuView: RoundDropMenuView!
-    @IBOutlet weak var dataImageView: UIImageView?
-    @IBOutlet weak var descriptionLabel: UILabel?
+    private var menuView: RoundDropMenuView! { return viewForMenu() }
     
-    var drops = [DropProtocol]()
-    var dropViews = [DropView]()
+    var delegate: RoundDropMenuDelegate?
+    
+    private var drops = [DropProtocol]()
+    private var dropViews = [DropView]()
     
     // MARK: Drop Appearence Properties
     
@@ -29,7 +29,7 @@ class RoundDropMenuViewController: UIViewController {
     
     // MARK: Drops Managing
     
-    var selectedDropIndex: Int? {
+    private var selectedDropIndex: Int? {
         didSet {
             if let dropView = selectedDropView {
                 if (oldValue != nil) && (dropViews[oldValue!] !== nil) {
@@ -37,16 +37,17 @@ class RoundDropMenuViewController: UIViewController {
                 }
                 dropView.color = dropColor
             }
+            delegate?.didSelectDropWithIndex(selectedDropIndex!)
         }
     }
-    var selectedDrop: DropProtocol? {
+    private var selectedDrop: DropProtocol? {
         if let index = selectedDropIndex {
             return drops[index]
         } else {
             return nil
         }
     }
-    var selectedDropView: DropView? {
+    private var selectedDropView: DropView? {
         if let index = selectedDropIndex {
             return dropViews[index]
         } else {
@@ -54,7 +55,7 @@ class RoundDropMenuViewController: UIViewController {
         }
     }
     
-    var dropsScrollPosition: CGFloat = 0.0 {
+    private var dropsScrollPosition: CGFloat = 0.0 {
         didSet {
             if dropsScrollPosition < 0.0 {
                 dropsScrollPosition = 0.0
@@ -66,23 +67,21 @@ class RoundDropMenuViewController: UIViewController {
             }
         }
     }
-    var maxDropsScrollPosition: CGFloat { return drops.isEmpty ? 0 : CGFloat(drops.count - 1) * dropWidthWithOffset }
+    private var maxDropsScrollPosition: CGFloat { return drops.isEmpty ? 0 : CGFloat(drops.count - 1) * dropWidthWithOffset }
     
-    var menuCenter: CGPoint!
-    var outlineRadius: CGFloat!
+    private var menuCenter: CGPoint!
+    private var outlineRadius: CGFloat!
     
-    // Here you can add your drops
-    
-    func setup() {
+    private func setup() {
         let panGesture = UIPanGestureRecognizer(target: self, action: Selector("dropsScroll:"))
         menuView.addGestureRecognizer(panGesture)
         
-        let d1 = Drop(title: "Arnold", description: "")
-        let d2 = Drop(title: "Helga", description: "")
-        let d3 = Drop(title: "Grandpa", description: "")
-        addDrops([d1, d2, d3])
-        
-        updateView()
+        let number = numberOfDrops()
+        for i in 0..<number {
+            if let drop = dropForIndex(i) {
+                addDrops([drop])
+            }
+        }
     }
     
     // MARK: - View Lifecycle
@@ -102,7 +101,7 @@ class RoundDropMenuViewController: UIViewController {
         translateSelectedDropToCenter()
     }
     
-    func addDrops(newDrops: [DropProtocol]) {
+    private func addDrops(newDrops: [DropProtocol]) {
         for newDrop in newDrops {
             let newDropView = DropView(color: backgroundDropColor,
                 radius: maxDropRadius,
@@ -118,18 +117,24 @@ class RoundDropMenuViewController: UIViewController {
         }
     }
     
-    func updateView() {
-        if let label = self.descriptionLabel {
-            label.text = selectedDrop?.description
-        }
-        if let imageView = self.dataImageView {
-            imageView.image = selectedDrop?.image
-        }
+    // MARK: - RoundDropMenuDataSource
+    
+    func numberOfDrops() -> Int {
+        return drops.count
+    }
+    
+    func dropForIndex(index: Int) -> DropProtocol? {
+        return (drops.count > 0) ? drops[index] : nil
+    }
+    
+    func viewForMenu() -> RoundDropMenuView? {
+        assert(true, "Needs to be overriden in a subclass")
+        return nil;
     }
     
     // MARK: - Drops Animations
     
-    func translateSelectedDropToCenter() {
+    private func translateSelectedDropToCenter() {
         if let centerDrop = selectedDropView {
             let scrollOffset = menuCenter.x - centerDrop.center.x
            
@@ -142,7 +147,7 @@ class RoundDropMenuViewController: UIViewController {
         }
     }
     
-    func moveDropsWithOffset(offset: CGFloat) {
+    private func moveDropsWithOffset(offset: CGFloat) {
         for dropView in self.dropViews {
             dropView.center.x += offset
             
@@ -153,13 +158,13 @@ class RoundDropMenuViewController: UIViewController {
         }
     }
     
-    func getYOnCircleForX(x: CGFloat) -> CGFloat {
+    private func getYOnCircleForX(x: CGFloat) -> CGFloat {
         func sqr(x: CGFloat) -> CGFloat { return x * x }
         // (x-menuCenter.x)^2 + (y-(dropRadius + outlineRadius))^2=outlineRadius^2
         return -sqrt(sqr(outlineRadius) - sqr(x - menuCenter.x)) + maxDropRadius + outlineRadius
     }
     
-    func resizeDropView(dropView: DropView) {
+    private func resizeDropView(dropView: DropView) {
         let offsetRelativeToCenter = abs(dropView.center.x - menuCenter.x)
         let scaleValue = 1 - offsetRelativeToCenter / menuCenter.x
         let dropScale = 2 * ((maxDropRadius - minDropRadius) * scaleValue + minDropRadius)
@@ -170,8 +175,8 @@ class RoundDropMenuViewController: UIViewController {
     
     // MARK: - UIGestures
     
-    var panStart: CGFloat = 0.0
-    func dropsScroll(gestureRecognizer: UIPanGestureRecognizer) {
+    private var panStart: CGFloat = 0.0
+    @objc private func dropsScroll(gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == .Began {
             panStart = gestureRecognizer.locationInView(menuView).x
         }
@@ -186,7 +191,6 @@ class RoundDropMenuViewController: UIViewController {
         
         if gestureRecognizer.state == .Ended {
             translateSelectedDropToCenter()
-            updateView()
         }
     }
 }
