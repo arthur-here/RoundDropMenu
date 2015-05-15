@@ -71,19 +71,20 @@ class RoundDropMenuViewController: UIViewController {
     var menuCenter: CGPoint!
     var outlineRadius: CGFloat!
     
-    // Here you can add your drops
+    
+    // HERE YOU CAN ADD YOUR DROPS
     
     func setup() {
         let panGesture = UIPanGestureRecognizer(target: self, action: Selector("dropsScroll:"))
         menuView.addGestureRecognizer(panGesture)
         
-        let d1 = Drop(title: "Arnold", description: "")
-        let d2 = Drop(title: "Helga", description: "")
-        let d3 = Drop(title: "Grandpa", description: "")
-        addDrops([d1, d2, d3])
+        // let d1 = Drop(title: "Arnold", description: "")
+        // let d2 = Drop(title: "Helga", description: "")
+        // addDrops([d1, d2])
         
         updateView()
     }
+    
     
     // MARK: - View Lifecycle
     
