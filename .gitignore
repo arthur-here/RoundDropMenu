@@ -1,5 +1,6 @@
 # Xcode
 #
+.DS_Store
 build/
 *.pbxuser
 !default.pbxuser
@@ -17,6 +18,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 xcuserdata/
+.idea/
+UserInterfaceState.xcuserstate
 
 # CocoaPods
 #
