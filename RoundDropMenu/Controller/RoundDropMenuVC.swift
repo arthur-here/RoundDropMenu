@@ -120,15 +120,17 @@ class RoundDropMenuViewController: UIViewController {
     // MARK: - RoundDropMenuDataSource
     
     func numberOfDrops() -> Int {
-        return drops.count
+        assert(false, "Needs to be overriden in a subclass")
+        return 0
     }
     
     func dropForIndex(index: Int) -> DropProtocol? {
-        return (drops.count > 0) ? drops[index] : nil
+        assert(false, "Needs to be overriden in a subclass")
+        return nil
     }
     
     func viewForMenu() -> RoundDropMenuView? {
-        assert(true, "Needs to be overriden in a subclass")
+        assert(false, "Needs to be overriden in a subclass")
         return nil;
     }
     
