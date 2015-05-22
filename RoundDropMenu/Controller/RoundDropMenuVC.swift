@@ -138,24 +138,80 @@ class RoundDropMenuViewController: UIViewController {
         if let centerDrop = selectedDropView {
             let scrollOffset = menuCenter.x - centerDrop.center.x
            
-            UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseIn,
-                animations: { [unowned self] in self.moveDropsWithOffset(scrollOffset)
-                    if let index = self.selectedDropIndex {
-                        self.dropsScrollPosition = CGFloat(index) * self.dropWidthWithOffset
-                    }
-                }, completion: nil )
+            moveDropsWithOffset(scrollOffset, animated: true)
+            if let index = selectedDropIndex {
+                self.dropsScrollPosition = CGFloat(index) * self.dropWidthWithOffset
+            }
         }
     }
     
-    private func moveDropsWithOffset(offset: CGFloat) {
+    func isDropInView(dropView: DropView) -> Bool {
+        return !(dropView.center.x > menuView.frame.width + maxDropRadius || dropView.center.x < -maxDropRadius)
+    }
+    
+    private func moveDropsWithOffset(offset: CGFloat, animated: Bool = false) {
         for dropView in self.dropViews {
-            dropView.center.x += offset
+            let newPosition = getDropPositionAfterApplyingOffset(dropView, offset: offset)
             
-            if !(dropView.center.x > menuView.frame.width + maxDropRadius || dropView.center.x < -maxDropRadius) {
-                dropView.center.y = getYOnCircleForX(dropView.center.x)
-                resizeDropView(dropView)
+            if animated {
+                animateDropMove(dropView, newPosition: newPosition)
+            } else {
+                dropView.center = newPosition
+            }
+            
+            if isDropInView(dropView) {
+                resizeDropView(dropView, animated: animated)
             }
         }
+    }
+    
+    private func animateDropMove(dropView: DropView, newPosition: CGPoint) {
+        // Constructing path
+        let midPointX1 = dropView.center.x + (newPosition.x - dropView.center.x) / 3
+        let midPoint1 = CGPoint(x: midPointX1, y: getYOnCircleForX(midPointX1))
+        let midPointX2 = dropView.center.x + 2 * (newPosition.x - dropView.center.x) / 3
+        let midPoint2 = CGPoint(x: midPointX2, y: getYOnCircleForX(midPointX2))
+
+        let dropPath = UIBezierPath()
+        dropPath.moveToPoint(dropView.center)
+        dropPath.addCurveToPoint(newPosition, controlPoint1: midPoint1, controlPoint2: midPoint2)
+        
+        let midViewFrame1 = getDropViewFrame(dropView, position: midPoint1)
+        let midViewFrame2 = getDropViewFrame(dropView, position: midPoint2)
+        let endViewFrame = getDropViewFrame(dropView, position: newPosition)
+        let midLabelPoint1 = CGPoint(x: midViewFrame1.width / 2, y: -1 - dropView.label.frame.height / 2)
+        let midLabelPoint2 = CGPoint(x: midViewFrame2.width / 2, y: -1 - dropView.label.frame.height / 2)
+        let endLabelPoint = CGPoint(x: endViewFrame.width / 2, y: -1 - dropView.label.frame.height / 2)
+        
+        let labelPath = UIBezierPath()
+        labelPath.moveToPoint(CGPoint(x: dropView.frame.width / 2, y: -1 - dropView.label.frame.height / 2))
+        labelPath.addCurveToPoint(endLabelPoint, controlPoint1: midLabelPoint1, controlPoint2: midLabelPoint2)
+        
+        
+        // Constructing animation
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path = dropPath.CGPath
+        animation.removedOnCompletion = true
+        animation.fillMode = kCAFillModeForwards
+        animation.duration = 0.1
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        dropView.layer.addAnimation(animation, forKey: "moveToCenterAnimation")
+        
+        animation.path = labelPath.CGPath
+        dropView.label.layer.addAnimation(animation, forKey: "label")
+        
+        dropView.center = newPosition
+    }
+    
+    private func getDropPositionAfterApplyingOffset(dropView: DropView, offset: CGFloat) -> CGPoint {
+        var result = dropView.center
+        result.x += offset
+        
+        if isDropInView(dropView) {
+            result.y = getYOnCircleForX(result.x)
+        }
+        return result
     }
     
     private func getYOnCircleForX(x: CGFloat) -> CGFloat {
@@ -164,13 +220,34 @@ class RoundDropMenuViewController: UIViewController {
         return -sqrt(sqr(outlineRadius) - sqr(x - menuCenter.x)) + maxDropRadius + outlineRadius
     }
     
-    private func resizeDropView(dropView: DropView) {
-        let offsetRelativeToCenter = abs(dropView.center.x - menuCenter.x)
+    private func resizeDropView(dropView: DropView, animated: Bool = false) {
+        let newDropFrame = getDropViewFrame(dropView, position: dropView.center)
+        if (animated) {
+            animateDropResize(dropView, newSize: newDropFrame)
+        } else {
+            dropView.frame = newDropFrame
+        }
+    }
+    
+    private func getDropViewFrame(dropView: DropView, position: CGPoint) -> CGRect {
+        let offsetRelativeToCenter = abs(position.x - menuCenter.x)
         let scaleValue = 1 - offsetRelativeToCenter / menuCenter.x
         let dropScale = 2 * ((maxDropRadius - minDropRadius) * scaleValue + minDropRadius)
         
-        let dropCenter = dropView.center
-        dropView.frame = CGRect(x: dropCenter.x - dropScale/2, y: dropCenter.y - dropScale/2, width: dropScale, height: dropScale)
+        return CGRect(x: position.x - dropScale/2, y: position.y - dropScale/2, width: dropScale, height: dropScale)
+    }
+    
+    private func animateDropResize(dropView: DropView, newSize: CGRect) {
+        var s = newSize
+        s.origin = CGPointZero
+        let animation = CABasicAnimation(keyPath: "bounds")
+        animation.fromValue = NSValue(&dropView.bounds, withObjCType: "CGRect")
+        animation.toValue = NSValue(&s, withObjCType: "CGRect")
+        animation.duration = 0.1
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        dropView.layer.addAnimation(animation, forKey: "resizeAnimation")
+        dropView.frame = newSize
     }
     
     // MARK: - UIGestures
