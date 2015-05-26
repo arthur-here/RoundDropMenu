@@ -18,4 +18,4 @@ iOS menu written on Swift that ideally suits small amount of image data.
 * provide more public settings for appearance;
 
 ## Author
-* Arthur Myronenko - [@monkey_is_gone](https://twitter.com/monkey_is_gone)
+* Arthur Myronenko - [@monkey_has_gone](https://twitter.com/monkey_has_gone)
