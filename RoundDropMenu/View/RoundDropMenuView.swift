@@ -8,8 +8,11 @@
 
 import UIKit
 
+@IBDesignable
 class RoundDropMenuView: UIView {
-    var color = UIColor(red: 254/255, green: 225/255, blue: 22/255, alpha: 1.0)
+    @IBInspectable
+    var color: UIColor = UIColor(red: 254/255, green: 225/255, blue: 22/255, alpha: 1.0)
+    @IBInspectable
     var offset: CGFloat = 80
     
     override func drawRect(rect: CGRect) {
