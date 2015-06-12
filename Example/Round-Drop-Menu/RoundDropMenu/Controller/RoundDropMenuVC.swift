@@ -219,6 +219,9 @@ class RoundDropMenuViewController: UIViewController {
     private func getYOnCircleForX(x: CGFloat) -> CGFloat {
         func sqr(x: CGFloat) -> CGFloat { return x * x }
         // (x-menuCenter.x)^2 + (y-(dropRadius + outlineRadius))^2=outlineRadius^2
+        if x <= menuCenter.x - outlineRadius || x >= menuCenter.x + outlineRadius {
+            return maxDropRadius + outlineRadius
+        }
         return -sqrt(sqr(outlineRadius) - sqr(x - menuCenter.x)) + maxDropRadius + outlineRadius
     }
     
