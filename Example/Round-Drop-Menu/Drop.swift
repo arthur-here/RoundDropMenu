@@ -9,13 +9,13 @@
 import UIKit
 
 class Drop: DropProtocol {
-    var title: String
-    var description: String
-    var image: UIImage?
-    
-    required init(title: String, description: String, image: UIImage? = nil) {
-        self.title = title
-        self.description = description
-        self.image = image
-    }
+  var title: String
+  var description: String
+  var image: UIImage?
+  
+  required init(title: String, description: String, image: UIImage? = nil) {
+    self.title = title
+    self.description = description
+    self.image = image
+  }
 }

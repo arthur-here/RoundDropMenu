@@ -9,5 +9,5 @@
 import UIKit
 
 protocol RoundDropMenuDelegate {
-    func didSelectDropWithIndex(index: Int)
+  func didSelectDropWithIndex(index: Int)
 }

@@ -11,9 +11,9 @@ import UIKit
 // All Data Elements in Round-Drop Menu must confirm to this protocol
 
 protocol DropProtocol {
-    var title: String { get set }
-    var description: String { get set }
-    var image: UIImage? { get set }
-    
-    init(title: String, description: String, image: UIImage?)
+  var title: String { get set }
+  var description: String { get set }
+  var image: UIImage? { get set }
+  
+  init(title: String, description: String, image: UIImage?)
 }
