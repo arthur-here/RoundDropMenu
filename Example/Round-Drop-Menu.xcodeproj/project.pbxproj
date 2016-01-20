@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC458AAE1C505286002B5E54 /* RoundDropMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC458AAD1C505286002B5E54 /* RoundDropMenuDataSource.swift */; };
 		EC8AA5DF1B0610D3000E06E4 /* DropProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */; };
 		EC8AA5E11B0610D3000E06E4 /* RoundDropMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */; };
 		EC8AA5E61B066E23000E06E4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC458AAD1C505286002B5E54 /* RoundDropMenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDataSource.swift; path = ../../RoundDropMenu/Protocols/RoundDropMenuDataSource.swift; sourceTree = "<group>"; };
 		EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropProtocol.swift; path = ../../RoundDropMenu/Protocols/DropProtocol.swift; sourceTree = "<group>"; };
 		EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuVC.swift; path = ../../RoundDropMenu/Controller/RoundDropMenuVC.swift; sourceTree = "<group>"; };
 		EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */,
 				EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */,
+				EC458AAD1C505286002B5E54 /* RoundDropMenuDataSource.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				EC8AA5E11B0610D3000E06E4 /* RoundDropMenuVC.swift in Sources */,
 				EC8AA5EF1B067BEC000E06E4 /* RoundDropMenuView.swift in Sources */,
 				EC99CB641B060B70001DBDDC /* Drop.swift in Sources */,
+				EC458AAE1C505286002B5E54 /* RoundDropMenuDataSource.swift in Sources */,
 				EC99CB3B1B055082001DBDDC /* AppDelegate.swift in Sources */,
 				EC8AA5E61B066E23000E06E4 /* MenuViewController.swift in Sources */,
 				EC8AA5EE1B067BEC000E06E4 /* DropView.swift in Sources */,
