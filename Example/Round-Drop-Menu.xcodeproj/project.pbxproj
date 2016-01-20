@@ -32,12 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropProtocol.swift; path = RoundDropMenu/Protocols/DropProtocol.swift; sourceTree = "<group>"; };
-		EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuVC.swift; path = RoundDropMenu/Controller/RoundDropMenuVC.swift; sourceTree = "<group>"; };
+		EC8AA5DB1B0610D3000E06E4 /* DropProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropProtocol.swift; path = ../../RoundDropMenu/Protocols/DropProtocol.swift; sourceTree = "<group>"; };
+		EC8AA5DD1B0610D3000E06E4 /* RoundDropMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuVC.swift; path = ../../RoundDropMenu/Controller/RoundDropMenuVC.swift; sourceTree = "<group>"; };
 		EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDelegate.swift; path = RoundDropMenu/Protocols/RoundDropMenuDelegate.swift; sourceTree = "<group>"; };
-		EC8AA5EC1B067BEC000E06E4 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropView.swift; path = RoundDropMenu/View/DropView.swift; sourceTree = "<group>"; };
-		EC8AA5ED1B067BEC000E06E4 /* RoundDropMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuView.swift; path = RoundDropMenu/View/RoundDropMenuView.swift; sourceTree = "<group>"; };
+		EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDelegate.swift; path = ../../RoundDropMenu/Protocols/RoundDropMenuDelegate.swift; sourceTree = "<group>"; };
+		EC8AA5EC1B067BEC000E06E4 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropView.swift; path = ../../RoundDropMenu/View/DropView.swift; sourceTree = "<group>"; };
+		EC8AA5ED1B067BEC000E06E4 /* RoundDropMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuView.swift; path = ../../RoundDropMenu/View/RoundDropMenuView.swift; sourceTree = "<group>"; };
 		EC99CB351B055082001DBDDC /* Round-Drop-Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Round-Drop-Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC99CB391B055082001DBDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC99CB3A1B055082001DBDDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,7 +206,9 @@
 		EC99CB2D1B055082001DBDDC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Arthur Myronenko";
 				TargetAttributes = {
 					EC99CB341B055082001DBDDC = {
@@ -332,6 +334,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -398,6 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Round-Drop-Menu/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "arthurmyronenko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -408,6 +412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Round-Drop-Menu/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "arthurmyronenko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -416,16 +421,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Round-Drop-MenuTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "arthurmyronenko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Round-Drop-Menu.app/Round-Drop-Menu";
 			};
@@ -435,12 +437,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Round-Drop-MenuTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "arthurmyronenko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Round-Drop-Menu.app/Round-Drop-Menu";
 			};

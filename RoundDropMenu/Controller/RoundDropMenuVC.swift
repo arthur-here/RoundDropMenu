@@ -90,8 +90,8 @@ class RoundDropMenuViewController: UIViewController {
         setup()
     }
 
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+      return UIInterfaceOrientationMask.Portrait
     }
     
     override func viewDidLayoutSubviews() {

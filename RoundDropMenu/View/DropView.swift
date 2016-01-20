@@ -28,12 +28,12 @@ class DropView: UIView {
         self.init(color: UIColor.blueColor(), radius: 40.0, position: CGPointMake(0, 0))
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setup() {
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
         let labelConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:[label]-(1)-[superview]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["superview": self, "label": label])
         self.addConstraints(labelConstraintV)
