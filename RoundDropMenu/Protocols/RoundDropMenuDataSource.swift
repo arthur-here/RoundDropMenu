@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RoundDropMenuDataSource {
-  func numberOfDropsInRoundDropMenu(menu: RoundDropMenuView) -> Int
+  func numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int
   
-  func roundDropMenu(menu: RoundDropMenuView, dropViewForIndex index: Int) -> DropView
+  func roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView
 }

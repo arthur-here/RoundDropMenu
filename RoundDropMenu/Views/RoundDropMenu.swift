@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundDropMenuView: UIView {
+class RoundDropMenu: UIView {
   
   var dropViews = [DropView]()
   
@@ -25,7 +25,7 @@ class RoundDropMenuView: UIView {
   
   // MARK: - Menu Appearance
   
-  var color: UIColor = UIColor(red: 254/255, green: 225/255, blue: 22/255, alpha: 1.0)
+  var color: UIColor = UIColor(red: 1.0, green: 1.0, blue: 22.0/255.0, alpha: 1.0)
   var offset: CGFloat = 80
   
   // MARK: Drop Appearance
@@ -42,7 +42,7 @@ class RoundDropMenuView: UIView {
         }
         dropView.highlited = true
       }
-      delegate?.didSelectDropWithIndex(selectedDropIndex!)
+      delegate?.roundDropMenu(self, didSelectDropWithIndex: selectedDropIndex!)
     }
   }
   
@@ -51,16 +51,16 @@ class RoundDropMenuView: UIView {
     return dropViews[index]
   }
   
-  private var dropsScrollPosition: CGFloat = 0.0 {
+  private var scrollPosition: CGFloat = 0.0 {
     didSet {
-      if dropsScrollPosition < 0.0 {
-        dropsScrollPosition = 0.0
-      } else if dropsScrollPosition > maxDropsScrollPosition {
-        dropsScrollPosition = maxDropsScrollPosition
+      if scrollPosition < 0.0 {
+        scrollPosition = 0.0
+      } else if scrollPosition > maxDropsScrollPosition {
+        scrollPosition = maxDropsScrollPosition
       }
       
-      if dropsScrollPosition != oldValue {
-        selectedDropIndex = Int(round(dropsScrollPosition / dropWidthWithOffset))
+      if scrollPosition != oldValue {
+        selectedDropIndex = Int(round(scrollPosition / dropWidthWithOffset))
       }
     }
   }
@@ -72,17 +72,6 @@ class RoundDropMenuView: UIView {
   
   private var menuCenter: CGPoint!
   private var outlineRadius: CGFloat!
-  
-  private func dropViewForIndex(index: Int) -> DropView {
-    guard let dataSource = dataSource else {
-      fatalError("You should provide data source to RoundDropMenu")
-    }
-    guard index < dataSource.numberOfDropsInRoundDropMenu(self) else {
-      fatalError("Index out of provided range!")
-    }
-    
-    return dataSource.roundDropMenu(self, dropViewForIndex: index)
-  }
   
   private func loadDropViews() -> [DropView] {
     var result = [DropView]()
@@ -120,7 +109,7 @@ class RoundDropMenuView: UIView {
       
       moveDropsWithOffset(scrollOffset, animated: true)
       if let index = selectedDropIndex {
-        self.dropsScrollPosition = CGFloat(index) * self.dropWidthWithOffset
+        self.scrollPosition = CGFloat(index) * self.dropWidthWithOffset
       }
     }
   }
@@ -274,7 +263,7 @@ class RoundDropMenuView: UIView {
       let scrollOffset = (gestureRecognizer.locationInView(self).x - panStart) / 2
       panStart = gestureRecognizer.locationInView(self).x
       
-      dropsScrollPosition -= scrollOffset
+      scrollPosition -= scrollOffset
       moveDropsWithOffset(scrollOffset)
     }
     

@@ -8,6 +8,17 @@
 
 import UIKit
 
+/**
+ *  The delegate of RoundDropMenu should conform to RoundDropMenuDelegate.
+ */
 protocol RoundDropMenuDelegate {
-  func didSelectDropWithIndex(index: Int)
+  
+  /**
+   Tells the delegate that the specified `DropView` is now selected.
+   
+   - parameter menu:  A `RoundDropMenu` object informing the delegate about
+   the new `DropView` selection
+   - parameter index: An index locating the new selected `DropView`
+   */
+  func roundDropMenu(menu: RoundDropMenu, didSelectDropWithIndex index: Int)
 }

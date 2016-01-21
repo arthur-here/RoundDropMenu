@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMenuDelegate {
+class MenuViewController: UIViewController, RoundDropMenuDataSource {
   
-  @IBOutlet weak var menuView: RoundDropMenuView!
+  @IBOutlet weak var menuView: RoundDropMenu!
   
   let dropColor = UIColor(red: 164.0/255.0, green: 25.0/255.0, blue: 118.0/255.0, alpha: 1.0)
   
@@ -25,18 +25,14 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMe
     super.viewDidLoad()
   }
   
-  func numberOfDropsInRoundDropMenu(menu: RoundDropMenuView) -> Int {
+  func numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int {
     return data.count
   }
   
-  func roundDropMenu(menu: RoundDropMenuView, dropViewForIndex index: Int) -> DropView {
+  func roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView {
     let dropView = DropView(color: dropColor)
     dropView.highlitedColor = UIColor(red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
     dropView.label.text = data[index].title
     return dropView
-  }
-  
-  func didSelectDropWithIndex(index: Int) {
-    // handle event
   }
 }
