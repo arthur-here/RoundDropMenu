@@ -2,23 +2,37 @@
 
 [![Build Status](https://travis-ci.org/burntheroad/Round-Drop-Menu.svg?branch=master)](https://travis-ci.org/burntheroad/Round-Drop-Menu)
 
-iOS menu written on Swift that ideally suits small amount of image data.
+Simple highly customizable iOS component written in Swift gives you another way to represent data. Round-Drop-Menu is great for small sets of visual information.
 
 ![](http://i.imgur.com/gJLDmAP.gif)
 
 ## Usage
-1. Add files from Round-Drop-Menu folder to your project.
-2. Create a class that cofirms to `DropProtocol`.
-3. Create a subclass of a `RoundDropViewController`.
-4. Override methods `numberOfDrops()` and `dropForIndex(index:)`.
-5. In storyboard add new view.
-6. Create new outlet in your subclass and submit it to overriden method `viewForMenu()`.
-7. You can use `RoundDropMenuDelegate` to handle menu event.
-8. You can configure appearance of your menu by setting `dropColor` and `backgroundDropColor` in your subclass.
+Round-Drop-Menu usage is very similar to `UITableView` or `UICollectionView`. You should simply:
+
+1. Place `RoundDropMenu` in your View Controller.
+2. Conform your View Controller to `RoundDropMenuDataSource` and implement two methods:
+  * `numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int`
+  * `roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView`
+3.  Set `RoundDropMenu` `dataSource` to your View Controller. 
+4.  *Optionally conform to `RoundDropMenuDelegate` to get method `roundDropMenu(menu: RoundDropMenu, didSelectDropWithIndex index: Int)`*
+  
+## Customization
+You can change appearance of menu by setting next properties:
+
+##### `DropView`:
+* `color` - default color of the drops
+* `highlitedColor` - color of view in highlithed state.
+
+##### `RoundDropMenu`:
+* `color` - color of the oval in the center of menu.
+* `offset` - padding from view bounds to oval.
+* `maxDropRadius` - radius of the drop in the center of menu.
+* `minDropRadius` - minimal radius of the drop.
 
 ## TODOs:
-* change animation for centring drops;
-* provide more public settings for appearance;
+- [ ] CocoaPods/Carthage/SPM
+- [ ] Implement scroll deceleration
+- [ ] More customization options
 
 ## Author
 * Arthur Myronenko - [@monkey_has_gone](https://twitter.com/monkey_has_gone)
