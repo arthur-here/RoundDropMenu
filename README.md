@@ -1,4 +1,7 @@
 # Round-Drop-Menu
+
+[![Build Status](https://travis-ci.org/burntheroad/Round-Drop-Menu.svg?branch=master)](https://travis-ci.org/burntheroad/Round-Drop-Menu)
+
 iOS menu written on Swift that ideally suits small amount of image data.
 
 ![](http://i.imgur.com/gJLDmAP.gif)
