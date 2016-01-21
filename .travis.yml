@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode7.3
+xcode_project: Round-Drop-Menu.xcodeproj
+xcode_scheme: Round-Drop-Menu
+xcode_sdk: iphoneos9.2
