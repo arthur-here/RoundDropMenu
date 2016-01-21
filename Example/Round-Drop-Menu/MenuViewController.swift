@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: RoundDropMenuViewController, RoundDropMenuDelegate {
+class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMenuDelegate {
   
   @IBOutlet weak var menuView: RoundDropMenuView!
   
@@ -17,20 +17,17 @@ class MenuViewController: RoundDropMenuViewController, RoundDropMenuDelegate {
     Drop(title: "Grandpa", description: "")]
   
   override func viewDidLoad() {
-    delegate = self
+    menuView.dataSource = self
     super.viewDidLoad()
   }
   
-  override func numberOfDrops() -> Int {
+  func numberOfDropsInRoundDropMenu(menu: RoundDropMenuView) -> Int {
     return data.count
   }
   
-  override func dropForIndex(index: Int) -> DropProtocol? {
-    return (index < data.count) ? data[index] : nil
-  }
-  
-  override func viewForMenu() -> RoundDropMenuView? {
-    return menuView
+  func roundDropMenu(menu: RoundDropMenuView, dropViewForIndex index: Int) -> DropView {
+    let dropView = DropView(color: UIColor.yellowColor())
+    return dropView
   }
   
   func didSelectDropWithIndex(index: Int) {

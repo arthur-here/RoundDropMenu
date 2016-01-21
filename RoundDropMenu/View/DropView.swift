@@ -24,6 +24,10 @@ class DropView: UIView {
     setup()
   }
   
+  convenience init(color: UIColor) {
+    self.init(color: color, radius: 0.0, position: CGPoint.zero)
+  }
+  
   convenience override init(frame: CGRect) {
     self.init(color: UIColor.blueColor(), radius: 40.0, position: CGPointMake(0, 0))
   }

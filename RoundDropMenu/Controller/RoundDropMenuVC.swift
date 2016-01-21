@@ -16,7 +16,7 @@ class RoundDropMenuViewController: UIViewController {
   
   var delegate: RoundDropMenuDelegate?
   
-  private var drops = [DropProtocol]()
+  private var drops = [DropType]()
   private var dropViews = [DropView]()
   
   // MARK: Drop Appearence Properties
@@ -40,7 +40,7 @@ class RoundDropMenuViewController: UIViewController {
       delegate?.didSelectDropWithIndex(selectedDropIndex!)
     }
   }
-  private var selectedDrop: DropProtocol? {
+  private var selectedDrop: DropType? {
     if let index = selectedDropIndex {
       return drops[index]
     } else {
@@ -101,7 +101,7 @@ class RoundDropMenuViewController: UIViewController {
     translateSelectedDropToCenter()
   }
   
-  private func addDrops(newDrops: [DropProtocol]) {
+  private func addDrops(newDrops: [DropType]) {
     for newDrop in newDrops {
       let newDropView = DropView(color: backgroundDropColor,
         radius: maxDropRadius,
@@ -124,7 +124,7 @@ class RoundDropMenuViewController: UIViewController {
     return 0
   }
   
-  func dropForIndex(index: Int) -> DropProtocol? {
+  func dropForIndex(index: Int) -> DropType? {
     assert(false, "Needs to be overriden in a subclass")
     return nil
   }

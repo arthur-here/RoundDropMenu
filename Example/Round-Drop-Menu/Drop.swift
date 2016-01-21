@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Drop: DropProtocol {
+class Drop: DropType {
   var title: String
   var description: String
   var image: UIImage?
