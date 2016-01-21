@@ -1,5 +1,5 @@
 //
-//  RoundDropMenuViewController.swift
+//  RoundDropMenuView.swift
 //  Round-Drop Menu
 //
 //  Created by Arthur Myronenko on 15.03.15.
@@ -8,26 +8,33 @@
 
 import UIKit
 
-class RoundDropMenuViewController: UIViewController {
+class RoundDropMenuView: UIView {
   
-  // MARK: - Properties
+  var dropViews = [DropView]()
   
-  private var menuView: RoundDropMenuView! { return viewForMenu() }
+  var delegate: RoundDropMenuDelegate!
+  var dataSource: RoundDropMenuDataSource! {
+    didSet {
+      dropViews = loadDropViews()
+      
+      if selectedDropIndex == nil {
+        selectedDropIndex = 0
+      }
+    }
+  }
   
-  var delegate: RoundDropMenuDelegate?
+  // MARK: - Menu Appearance
   
-  private var drops = [DropType]()
-  private var dropViews = [DropView]()
+  var color: UIColor = UIColor(red: 254/255, green: 225/255, blue: 22/255, alpha: 1.0)
+  var offset: CGFloat = 80
   
-  // MARK: Drop Appearence Properties
+  // MARK: Drop Appearance
   
   var dropColor = UIColor(red: 255.0/255.0, green: 0.0/255.0, blue: 130.0/255.0, alpha: 1.0)
   var backgroundDropColor = UIColor(red: 164.0/255.0, green: 25.0/255.0, blue: 118.0/255.0, alpha: 1.0)
   let maxDropRadius: CGFloat = 40.0
   let minDropRadius: CGFloat = 20.0
   var dropWidthWithOffset: CGFloat { return (maxDropRadius * 2 + 20) }
-  
-  // MARK: Drops Managing
   
   private var selectedDropIndex: Int? {
     didSet {
@@ -40,19 +47,10 @@ class RoundDropMenuViewController: UIViewController {
       delegate?.didSelectDropWithIndex(selectedDropIndex!)
     }
   }
-  private var selectedDrop: DropType? {
-    if let index = selectedDropIndex {
-      return drops[index]
-    } else {
-      return nil
-    }
-  }
+  
   private var selectedDropView: DropView? {
-    if let index = selectedDropIndex {
-      return dropViews[index]
-    } else {
-      return nil
-    }
+    guard let index = selectedDropIndex else { return nil }
+    return dropViews[index]
   }
   
   private var dropsScrollPosition: CGFloat = 0.0 {
@@ -62,76 +60,59 @@ class RoundDropMenuViewController: UIViewController {
       } else if dropsScrollPosition > maxDropsScrollPosition {
         dropsScrollPosition = maxDropsScrollPosition;
       }
+      
       if (dropsScrollPosition != oldValue) {
         selectedDropIndex = Int(round(dropsScrollPosition / dropWidthWithOffset))
       }
     }
   }
-  private var maxDropsScrollPosition: CGFloat { return drops.isEmpty ? 0 : CGFloat(drops.count - 1) * dropWidthWithOffset }
+  
+  private var maxDropsScrollPosition: CGFloat {
+    let dropsCount = dataSource.numberOfDropsInRoundDropMenu(self)
+    return dropsCount == 0 ? 0 : CGFloat(dropsCount - 1) * dropWidthWithOffset
+  }
   
   private var menuCenter: CGPoint!
   private var outlineRadius: CGFloat!
   
-  private func setup() {
-    let panGesture = UIPanGestureRecognizer(target: self, action: Selector("dropsScroll:"))
-    menuView.addGestureRecognizer(panGesture)
-    
-    let number = numberOfDrops()
-    for i in 0..<number {
-      if let drop = dropForIndex(i) {
-        addDrops([drop])
-      }
+  private func dropViewForIndex(index: Int) -> DropView {
+    guard let dataSource = dataSource else {
+      fatalError("You should provide data source to RoundDropMenu")
     }
+    guard index < dataSource.numberOfDropsInRoundDropMenu(self) else {
+      fatalError("Index out of provided range!")
+    }
+    
+    return dataSource.roundDropMenu(self, dropViewForIndex: index)
   }
   
-  // MARK: - View Lifecycle
-  
-  override func viewDidLoad() {
-    setup()
+  private func loadDropViews() -> [DropView] {
+    var result = [DropView]()
+    let dropsCount = dataSource.numberOfDropsInRoundDropMenu(self)
+    for i in 0..<dropsCount {
+      let dropView = dataSource.roundDropMenu(self, dropViewForIndex: i)
+      dropView.radius = maxDropRadius
+      dropView.frame.origin = CGPoint(x: CGFloat(i) * dropWidthWithOffset, y: 0)
+      addSubview(dropView)
+      result.append(dropView)
+    }
+    
+    return result
   }
   
-  override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-    return UIInterfaceOrientationMask.Portrait
+  override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+    let panGesture = UIPanGestureRecognizer(target: self, action: Selector("dropsScroll:"))
+    addGestureRecognizer(panGesture)
   }
   
-  override func viewDidLayoutSubviews() {
-    menuCenter = CGPoint(x: menuView.frame.size.width / 2, y: menuView.frame.height / 2)
-    outlineRadius = menuView.frame.width / 2 + menuView.frame.width / 4
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    menuCenter = CGPoint(x: frame.size.width / 2, y: frame.height / 2)
+    outlineRadius = frame.width / 2 + frame.width / 4
     
     translateSelectedDropToCenter()
-  }
-  
-  private func addDrops(newDrops: [DropType]) {
-    for newDrop in newDrops {
-      let newDropView = DropView(color: backgroundDropColor,
-        radius: maxDropRadius,
-        position: CGPointMake(CGFloat(dropViews.count) * dropWidthWithOffset, 0))
-      newDropView.label.text = newDrop.title
-      dropViews += [newDropView]
-      self.menuView.addSubview(newDropView)
-    }
-    drops += newDrops
-    
-    if selectedDropIndex == nil {
-      selectedDropIndex = 0
-    }
-  }
-  
-  // MARK: - RoundDropMenuDataSource
-  
-  func numberOfDrops() -> Int {
-    assert(false, "Needs to be overriden in a subclass")
-    return 0
-  }
-  
-  func dropForIndex(index: Int) -> DropType? {
-    assert(false, "Needs to be overriden in a subclass")
-    return nil
-  }
-  
-  func viewForMenu() -> RoundDropMenuView? {
-    assert(false, "Needs to be overriden in a subclass")
-    return nil;
   }
   
   // MARK: - Drops Animations
@@ -148,7 +129,7 @@ class RoundDropMenuViewController: UIViewController {
   }
   
   func isDropInView(dropView: DropView) -> Bool {
-    return !(dropView.center.x > menuView.frame.width + maxDropRadius || dropView.center.x < -maxDropRadius)
+    return !(dropView.center.x > frame.width + maxDropRadius || dropView.center.x < -maxDropRadius)
   }
   
   private func moveDropsWithOffset(offset: CGFloat, animated: Bool = false) {
@@ -254,18 +235,30 @@ class RoundDropMenuViewController: UIViewController {
     dropView.layer.addAnimation(animation, forKey: "resizeAnimation")
     dropView.frame = newSize
   }
+
+  
+  override func drawRect(rect: CGRect) {
+    let ovalRect = CGRect(x: rect.origin.x, y: rect.origin.y + 20, width: rect.width, height: rect.height * 2)
+    let ovalPath = UIBezierPath(ovalInRect: CGRectInset(ovalRect, 20, offset))
+    ovalPath.addClip()
+    
+    color.setFill()
+    UIRectFill(bounds)
+    
+    super.drawRect(rect)
+  }
   
   // MARK: - UIGestures
   
   private var panStart: CGFloat = 0.0
   @objc private func dropsScroll(gestureRecognizer: UIPanGestureRecognizer) {
     if gestureRecognizer.state == .Began {
-      panStart = gestureRecognizer.locationInView(menuView).x
+      panStart = gestureRecognizer.locationInView(self).x
     }
     
     if gestureRecognizer.state == UIGestureRecognizerState.Changed {
-      let scrollOffset = (gestureRecognizer.locationInView(menuView).x - panStart) / 2
-      panStart = gestureRecognizer.locationInView(menuView).x
+      let scrollOffset = (gestureRecognizer.locationInView(self).x - panStart) / 2
+      panStart = gestureRecognizer.locationInView(self).x
       
       dropsScrollPosition -= scrollOffset
       moveDropsWithOffset(scrollOffset)
@@ -276,7 +269,3 @@ class RoundDropMenuViewController: UIViewController {
     }
   }
 }
-
-
-
-

@@ -12,9 +12,11 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMe
   
   @IBOutlet weak var menuView: RoundDropMenuView!
   
-  var data = [Drop(title: "Arnold", description: ""),
-    Drop(title: "Helga", description: ""),
-    Drop(title: "Grandpa", description: "")]
+  var data = [
+    (title: "Arnold", description: ""),
+    (title: "Helga", description: ""),
+    (title: "Grandpa", description: "")
+  ]
   
   override func viewDidLoad() {
     menuView.dataSource = self
@@ -27,6 +29,7 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMe
   
   func roundDropMenu(menu: RoundDropMenuView, dropViewForIndex index: Int) -> DropView {
     let dropView = DropView(color: UIColor.yellowColor())
+    dropView.label.text = data[index].title
     return dropView
   }
   
