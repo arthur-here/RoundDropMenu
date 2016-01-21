@@ -10,4 +10,7 @@ import UIKit
 import XCTest
 
 class RoundDropMenuTests: XCTestCase {
+  func emptyTest() {
+    
+  }
 }

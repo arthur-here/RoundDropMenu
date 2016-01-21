@@ -18,7 +18,7 @@
 		EC99CB401B055082001DBDDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC99CB3E1B055082001DBDDC /* Main.storyboard */; };
 		EC99CB421B055082001DBDDC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC99CB411B055082001DBDDC /* Images.xcassets */; };
 		EC99CB451B055082001DBDDC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC99CB431B055082001DBDDC /* LaunchScreen.xib */; };
-		EC99CB511B055082001DBDDC /* Round_Drop_MenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99CB501B055082001DBDDC /* Round_Drop_MenuTests.swift */; };
+		EC99CB511B055082001DBDDC /* RoundDropMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99CB501B055082001DBDDC /* RoundDropMenuTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 		EC99CB441B055082001DBDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EC99CB4A1B055082001DBDDC /* Round-Drop-MenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Round-Drop-MenuTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC99CB4F1B055082001DBDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC99CB501B055082001DBDDC /* Round_Drop_MenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Round_Drop_MenuTests.swift; sourceTree = "<group>"; };
+		EC99CB501B055082001DBDDC /* RoundDropMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundDropMenuTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 		EC99CB4D1B055082001DBDDC /* Round-Drop-MenuTests */ = {
 			isa = PBXGroup;
 			children = (
-				EC99CB501B055082001DBDDC /* Round_Drop_MenuTests.swift */,
+				EC99CB501B055082001DBDDC /* RoundDropMenuTests.swift */,
 				EC99CB4E1B055082001DBDDC /* Supporting Files */,
 			);
 			path = "Round-Drop-MenuTests";
@@ -288,7 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC99CB511B055082001DBDDC /* Round_Drop_MenuTests.swift in Sources */,
+				EC99CB511B055082001DBDDC /* RoundDropMenuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
