@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC458AAE1C505286002B5E54 /* RoundDropMenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC458AAD1C505286002B5E54 /* RoundDropMenuDataSource.swift */; };
+		EC458AB31C506A9C002B5E54 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = EC458AB21C506A9C002B5E54 /* .swiftlint.yml */; };
 		EC8AA5E61B066E23000E06E4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */; };
 		EC8AA5E81B0678F3000E06E4 /* RoundDropMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */; };
 		EC8AA5EE1B067BEC000E06E4 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA5EC1B067BEC000E06E4 /* DropView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		EC458AAD1C505286002B5E54 /* RoundDropMenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDataSource.swift; path = ../../RoundDropMenu/Protocols/RoundDropMenuDataSource.swift; sourceTree = "<group>"; };
+		EC458AB21C506A9C002B5E54 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		EC8AA5E51B066E23000E06E4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EC8AA5E71B0678F3000E06E4 /* RoundDropMenuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundDropMenuDelegate.swift; path = ../../RoundDropMenu/Protocols/RoundDropMenuDelegate.swift; sourceTree = "<group>"; };
 		EC8AA5EC1B067BEC000E06E4 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropView.swift; path = ../../RoundDropMenu/Views/DropView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		EC99CB2C1B055082001DBDDC = {
 			isa = PBXGroup;
 			children = (
+				EC458AB21C506A9C002B5E54 /* .swiftlint.yml */,
 				EC99CB371B055082001DBDDC /* Round-Drop-Menu */,
 				EC99CB4D1B055082001DBDDC /* Round-Drop-MenuTests */,
 				EC99CB361B055082001DBDDC /* Products */,
@@ -158,6 +161,7 @@
 				EC99CB311B055082001DBDDC /* Sources */,
 				EC99CB321B055082001DBDDC /* Frameworks */,
 				EC99CB331B055082001DBDDC /* Resources */,
+				EC458AAF1C506900002B5E54 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -230,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC458AB31C506A9C002B5E54 /* .swiftlint.yml in Resources */,
 				EC99CB401B055082001DBDDC /* Main.storyboard in Resources */,
 				EC99CB451B055082001DBDDC /* LaunchScreen.xib in Resources */,
 				EC99CB421B055082001DBDDC /* Images.xcassets in Resources */,
@@ -244,6 +249,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC458AAF1C506900002B5E54 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC99CB311B055082001DBDDC /* Sources */ = {

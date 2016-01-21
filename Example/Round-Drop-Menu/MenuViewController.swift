@@ -12,6 +12,8 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMe
   
   @IBOutlet weak var menuView: RoundDropMenuView!
   
+  let dropColor = UIColor(red: 164.0/255.0, green: 25.0/255.0, blue: 118.0/255.0, alpha: 1.0)
+  
   var data = [
     (title: "Arnold", description: ""),
     (title: "Helga", description: ""),
@@ -28,7 +30,8 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMe
   }
   
   func roundDropMenu(menu: RoundDropMenuView, dropViewForIndex index: Int) -> DropView {
-    let dropView = DropView(color: UIColor.yellowColor())
+    let dropView = DropView(color: dropColor)
+    dropView.highlitedColor = UIColor(red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
     dropView.label.text = data[index].title
     return dropView
   }

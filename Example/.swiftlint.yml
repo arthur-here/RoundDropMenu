@@ -1,0 +1,4 @@
+included:
+  - ../RoundDropMenu
+disabled_rules:
+  - trailing_whitespace

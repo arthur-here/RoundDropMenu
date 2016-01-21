@@ -30,8 +30,6 @@ class RoundDropMenuView: UIView {
   
   // MARK: Drop Appearance
   
-  var dropColor = UIColor(red: 255.0/255.0, green: 0.0/255.0, blue: 130.0/255.0, alpha: 1.0)
-  var backgroundDropColor = UIColor(red: 164.0/255.0, green: 25.0/255.0, blue: 118.0/255.0, alpha: 1.0)
   let maxDropRadius: CGFloat = 40.0
   let minDropRadius: CGFloat = 20.0
   var dropWidthWithOffset: CGFloat { return (maxDropRadius * 2 + 20) }
@@ -40,9 +38,9 @@ class RoundDropMenuView: UIView {
     didSet {
       if let dropView = selectedDropView {
         if (oldValue != nil) && (dropViews[oldValue!] !== nil) {
-          dropViews[oldValue!].color = backgroundDropColor
+          dropViews[oldValue!].highlited = false
         }
-        dropView.color = dropColor
+        dropView.highlited = true
       }
       delegate?.didSelectDropWithIndex(selectedDropIndex!)
     }
@@ -58,10 +56,10 @@ class RoundDropMenuView: UIView {
       if dropsScrollPosition < 0.0 {
         dropsScrollPosition = 0.0
       } else if dropsScrollPosition > maxDropsScrollPosition {
-        dropsScrollPosition = maxDropsScrollPosition;
+        dropsScrollPosition = maxDropsScrollPosition
       }
       
-      if (dropsScrollPosition != oldValue) {
+      if dropsScrollPosition != oldValue {
         selectedDropIndex = Int(round(dropsScrollPosition / dropWidthWithOffset))
       }
     }
@@ -91,7 +89,6 @@ class RoundDropMenuView: UIView {
     let dropsCount = dataSource.numberOfDropsInRoundDropMenu(self)
     for i in 0..<dropsCount {
       let dropView = dataSource.roundDropMenu(self, dropViewForIndex: i)
-      dropView.radius = maxDropRadius
       dropView.frame.origin = CGPoint(x: CGFloat(i) * dropWidthWithOffset, y: 0)
       addSubview(dropView)
       result.append(dropView)
@@ -149,7 +146,6 @@ class RoundDropMenuView: UIView {
   }
   
   private func animateDropMove(dropView: DropView, newPosition: CGPoint) {
-    // Constructing path
     let midPointX1 = dropView.center.x + (newPosition.x - dropView.center.x) / 3
     let midPoint1 = CGPoint(x: midPointX1, y: getYOnCircleForX(midPointX1))
     let midPointX2 = dropView.center.x + 2 * (newPosition.x - dropView.center.x) / 3
@@ -162,14 +158,22 @@ class RoundDropMenuView: UIView {
     let midViewFrame1 = getDropViewFrame(dropView, position: midPoint1)
     let midViewFrame2 = getDropViewFrame(dropView, position: midPoint2)
     let endViewFrame = getDropViewFrame(dropView, position: newPosition)
-    let midLabelPoint1 = CGPoint(x: midViewFrame1.width / 2, y: -1 - dropView.label.frame.height / 2)
-    let midLabelPoint2 = CGPoint(x: midViewFrame2.width / 2, y: -1 - dropView.label.frame.height / 2)
-    let endLabelPoint = CGPoint(x: endViewFrame.width / 2, y: -1 - dropView.label.frame.height / 2)
+    let midLabelPoint1 = CGPoint(
+      x: midViewFrame1.width / 2,
+      y: -1 - dropView.label.frame.height / 2)
+    let midLabelPoint2 = CGPoint(
+      x: midViewFrame2.width / 2,
+      y: -1 - dropView.label.frame.height / 2)
+    let endLabelPoint = CGPoint(
+      x: endViewFrame.width / 2,
+      y: -1 - dropView.label.frame.height / 2)
     
     let labelPath = UIBezierPath()
-    labelPath.moveToPoint(CGPoint(x: dropView.frame.width / 2, y: -1 - dropView.label.frame.height / 2))
-    labelPath.addCurveToPoint(endLabelPoint, controlPoint1: midLabelPoint1, controlPoint2: midLabelPoint2)
-    
+    labelPath.moveToPoint(
+      CGPoint(x: dropView.frame.width / 2, y: -1 - dropView.label.frame.height / 2))
+    labelPath.addCurveToPoint(endLabelPoint,
+        controlPoint1: midLabelPoint1,
+        controlPoint2: midLabelPoint2)
     
     // Constructing animation
     let animation = CAKeyframeAnimation(keyPath: "position")
@@ -197,18 +201,20 @@ class RoundDropMenuView: UIView {
     return result
   }
   
+  // swiftlint:disable variable_name_min_length
   private func getYOnCircleForX(x: CGFloat) -> CGFloat {
-    func sqr(x: CGFloat) -> CGFloat { return x * x }
+    func sqr(n: CGFloat) -> CGFloat { return n * n }
     // (x-menuCenter.x)^2 + (y-(dropRadius + outlineRadius))^2=outlineRadius^2
     if x <= menuCenter.x - outlineRadius || x >= menuCenter.x + outlineRadius {
       return maxDropRadius + outlineRadius
     }
     return -sqrt(sqr(outlineRadius) - sqr(x - menuCenter.x)) + maxDropRadius + outlineRadius
   }
+  // swiftlint:enable variable_name_min_length
   
   private func resizeDropView(dropView: DropView, animated: Bool = false) {
     let newDropFrame = getDropViewFrame(dropView, position: dropView.center)
-    if (animated) {
+    if animated {
       animateDropResize(dropView, newSize: newDropFrame)
     } else {
       dropView.frame = newDropFrame
@@ -220,7 +226,11 @@ class RoundDropMenuView: UIView {
     let scaleValue = 1 - offsetRelativeToCenter / menuCenter.x
     let dropScale = 2 * ((maxDropRadius - minDropRadius) * scaleValue + minDropRadius)
     
-    return CGRect(x: position.x - dropScale/2, y: position.y - dropScale/2, width: dropScale, height: dropScale)
+    return CGRect(
+      x: position.x - dropScale/2,
+      y: position.y - dropScale/2,
+      width: dropScale,
+      height: dropScale)
   }
   
   private func animateDropResize(dropView: DropView, newSize: CGRect) {
@@ -238,7 +248,11 @@ class RoundDropMenuView: UIView {
 
   
   override func drawRect(rect: CGRect) {
-    let ovalRect = CGRect(x: rect.origin.x, y: rect.origin.y + 20, width: rect.width, height: rect.height * 2)
+    let ovalRect = CGRect(
+      x: rect.origin.x,
+      y: rect.origin.y + 20,
+      width: rect.width,
+      height: rect.height * 2)
     let ovalPath = UIBezierPath(ovalInRect: CGRectInset(ovalRect, 20, offset))
     ovalPath.addClip()
     

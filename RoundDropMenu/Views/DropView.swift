@@ -10,15 +10,16 @@ import UIKit
 
 class DropView: UIView {
   
+  var highlited = false { didSet { setNeedsDisplay() } }
+  
   var color: UIColor { didSet { setNeedsDisplay() } }
-  var radius: CGFloat
+  var highlitedColor: UIColor? { didSet { setNeedsDisplay() } }
   
   var label: UILabel
   
   init(color: UIColor, radius: CGFloat, position: CGPoint) {
     self.color = color
-    self.radius = radius
-    let frame = CGRectMake(position.x, position.y, radius * 2, radius * 2)
+    let frame = CGRect(x: position.x, y: position.y, width: radius * 2, height: radius * 2)
     self.label = UILabel()
     super.init(frame:frame)
     setup()
@@ -29,7 +30,7 @@ class DropView: UIView {
   }
   
   convenience override init(frame: CGRect) {
-    self.init(color: UIColor.blueColor(), radius: 40.0, position: CGPointMake(0, 0))
+    self.init(color: UIColor.blueColor(), radius: 0.0, position: CGPoint.zero)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -39,7 +40,11 @@ class DropView: UIView {
   private func setup() {
     label.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(label)
-    let labelConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:[label]-(1)-[superview]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["superview": self, "label": label])
+    let labelConstraintV = NSLayoutConstraint
+      .constraintsWithVisualFormat("V:[label]-(1)-[superview]",
+      options: NSLayoutFormatOptions.AlignAllCenterX,
+      metrics: nil,
+      views: ["superview": self, "label": label])
     self.addConstraints(labelConstraintV)
     
     label.textAlignment = .Center
@@ -52,7 +57,12 @@ class DropView: UIView {
     let ovalPath = UIBezierPath(ovalInRect: rect)
     ovalPath.addClip()
     
-    color.setFill()
+    if highlited, let highlitedColor = highlitedColor {
+      highlitedColor.setFill()
+    } else {
+      color.setFill()
+    }
+    
     UIRectFill(bounds)
     
     super.drawRect(rect)
