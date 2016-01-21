@@ -8,8 +8,28 @@
 
 import Foundation
 
+/**
+ *  The `RoundDropMenuDataSource` is adopted by an object that mediates the application's
+ *  data model for a `RoundDropMenu` object.
+ */
 protocol RoundDropMenuDataSource {
+  
+  /**
+   Asks the data source to return the number of dropViews in the menu.
+   
+   - parameter menu: An object representing the `RoundDropMenu` requesting the information.
+   
+   - returns: The number of dropViews in the menu.
+   */
   func numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int
   
+  /**
+   Asks the data source for a `DropView` to insert into particular index in `RoundDropMenu`
+   
+   - parameter menu:  An object representing the `RoundDropMenu` requesting the information.
+   - parameter index: An index locating `DropView` in `menu`.
+
+   - returns: `DropView` object that `menu` can use for the specified `index`.
+   */
   func roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView
 }
