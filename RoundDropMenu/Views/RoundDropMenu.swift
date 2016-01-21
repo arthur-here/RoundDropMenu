@@ -29,12 +29,12 @@ class RoundDropMenu: UIView {
   // MARK: Drop Appearance
   
   /// Radius of the drop in center of menu. Default is 40.0.
-  let maxDropRadius: CGFloat = 40.0
+  var maxDropRadius: CGFloat = 40.0
   /// Radius of the drop on the edge of menu. Default is 20.0
-  let minDropRadius: CGFloat = 20.0
+  var minDropRadius: CGFloat = 20.0
+  
   /// Radius that is used to calculate dropView's position and scale.
   private var outlineRadius: CGFloat! { return frame.width / 2 + frame.width / 4 }
-  
   
   // MARK: - Menu Properties
   
@@ -70,6 +70,9 @@ class RoundDropMenu: UIView {
     }
   }
   
+  /// Stores location of pan gesture start.
+  private var panStart: CGFloat = 0.0
+  
   // MARK: Computed Properties
   
   /// Maximum width of dropView with offset.
@@ -86,9 +89,6 @@ class RoundDropMenu: UIView {
     guard let index = selectedDropIndex else { return nil }
     return dropViews[index]
   }
-  
-  /// Stores location of pan gesture start.
-  private var panStart: CGFloat = 0.0
 }
 
 // MARK: - View Lifecycle

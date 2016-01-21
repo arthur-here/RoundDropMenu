@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, RoundDropMenuDataSource {
+class MenuViewController: UIViewController, RoundDropMenuDataSource, RoundDropMenuDelegate {
   
   @IBOutlet weak var menuView: RoundDropMenu!
   
@@ -34,5 +34,9 @@ class MenuViewController: UIViewController, RoundDropMenuDataSource {
     dropView.highlitedColor = UIColor(red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
     dropView.label.text = data[index].title
     return dropView
+  }
+  
+  func roundDropMenu(menu: RoundDropMenu, didSelectDropWithIndex index: Int) {
+    
   }
 }
