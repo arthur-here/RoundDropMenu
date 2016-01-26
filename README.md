@@ -1,10 +1,16 @@
 # Round-Drop-Menu
 
-[![Build Status](https://travis-ci.org/burntheroad/Round-Drop-Menu.svg?branch=master)](https://travis-ci.org/burntheroad/Round-Drop-Menu)
+[![Build Status](https://travis-ci.org/burntheroad/RoundDropMenu.svg?branch=master)](https://travis-ci.org/burntheroad/RoundDropMenu)
 
 Simple highly customizable iOS component written in Swift gives you another way to represent data. Round-Drop-Menu is great for small sets of visual information.
 
 ![](http://i.imgur.com/gJLDmAP.gif)
+
+## Installation
+RoundDropMenu is available through CocoaPods. To install it, simply add the following line to your Podfile:
+```
+pod 'RoundDropMenu'
+```
 
 ## Usage
 Round-Drop-Menu usage is very similar to `UITableView` or `UICollectionView`. You should simply:
