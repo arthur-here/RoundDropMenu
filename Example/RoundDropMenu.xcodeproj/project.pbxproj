@@ -15,6 +15,8 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		8FEB5352B10AAE5763171148 /* Pods_RoundDropMenu_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF2AA1B75A2A2582D829D33 /* Pods_RoundDropMenu_Tests.framework */; };
 		ECEFE4C81C58059B009C6555 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEFE4C71C58059B009C6555 /* MenuViewController.swift */; };
+		ECEFE4CA1C580CB0009C6555 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = ECEFE4C91C580CB0009C6555 /* .travis.yml */; };
+		ECEFE4CD1C580E62009C6555 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ECEFE4CC1C580E62009C6555 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		8F1DC1DD4F40246443E2DC0E /* Pods-RoundDropMenu_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoundDropMenu_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoundDropMenu_Tests/Pods-RoundDropMenu_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C0C3EBADC97F4291E0EBC0B3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		ECEFE4C71C58059B009C6555 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		ECEFE4C91C580CB0009C6555 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		ECEFE4CC1C580E62009C6555 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		F7369CB94EDBA061346F02C8 /* Pods_RoundDropMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoundDropMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -135,6 +139,8 @@
 				0B659FD1D48E9A7C09B034B4 /* RoundDropMenu.podspec */,
 				C0C3EBADC97F4291E0EBC0B3 /* README.md */,
 				35DAF74F72E6F83CF2401EF4 /* LICENSE */,
+				ECEFE4C91C580CB0009C6555 /* .travis.yml */,
+				ECEFE4CC1C580E62009C6555 /* .swiftlint.yml */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				932CA0F1F68B0EDE24C77C1B /* Embed Pods Frameworks */,
 				76CEB49C6D9C8750C95CB5C2 /* Copy Pods Resources */,
+				ECEFE4CB1C580DAA009C6555 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -246,8 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECEFE4CD1C580E62009C6555 /* .swiftlint.yml in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				ECEFE4CA1C580CB0009C6555 /* .travis.yml in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +360,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		ECEFE4CB1C580DAA009C6555 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
