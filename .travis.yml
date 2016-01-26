@@ -6,3 +6,4 @@ xcode_sdk: iphonesimulator9.2
 podfile: Example/Podfile
 before_install:
   brew install swiftlint
+  pod install
