@@ -1,0 +1,6 @@
+framework module Pods_RoundDropMenu_Example {
+  umbrella header "Pods-RoundDropMenu_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

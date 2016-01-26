@@ -11,11 +11,11 @@ Round-Drop-Menu usage is very similar to `UITableView` or `UICollectionView`. Yo
 
 1. Place `RoundDropMenu` in your View Controller.
 2. Conform your View Controller to `RoundDropMenuDataSource` and implement two methods:
-  * `numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int`
-  * `roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView`
+* `numberOfDropsInRoundDropMenu(menu: RoundDropMenu) -> Int`
+* `roundDropMenu(menu: RoundDropMenu, dropViewForIndex index: Int) -> DropView`
 3.  Set `RoundDropMenu` `dataSource` to your View Controller. 
 4.  *Optionally conform to `RoundDropMenuDelegate` to get method `roundDropMenu(menu: RoundDropMenu, didSelectDropWithIndex index: Int)`*
-  
+
 ## Customization
 You can change appearance of menu by setting next properties:
 

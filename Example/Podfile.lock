@@ -1,0 +1,14 @@
+PODS:
+  - RoundDropMenu (0.1.0)
+
+DEPENDENCIES:
+  - RoundDropMenu (from `../`)
+
+EXTERNAL SOURCES:
+  RoundDropMenu:
+    :path: ../
+
+SPEC CHECKSUMS:
+  RoundDropMenu: c5258aa9074b6c1ff0b512a34e2ed5c0b1bf9a22
+
+COCOAPODS: 0.39.0

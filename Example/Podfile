@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'RoundDropMenu_Example', :exclusive => true do
+  pod 'RoundDropMenu', :path => '../'
+end
+
+target 'RoundDropMenu_Tests', :exclusive => true do
+  pod 'RoundDropMenu', :path => '../'
+
+  
+end
